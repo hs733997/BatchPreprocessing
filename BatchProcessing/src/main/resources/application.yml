@@ -1,0 +1,56 @@
+server:
+  port: ${PORT_NUMBER:1010}
+
+
+fileReadyToBePreccessedLocation : C:/Users/pc/Documents/SpringProjectFileLoc/InputFile/fileReadyToBePreccessedLocation/
+fileValidationSuccessLocation : C:/Users/pc/Documents/SpringProjectFileLoc/OutputFile/fileValidationSuccessLocation
+fileValidationFailedLoaction : C:/Users/pc/Documents/SpringProjectFileLoc/OutPutFile/fileValidationFailedLoaction
+  #C:\Users\pc\Documents\SpringProjectFileLoc\OutputFile\fileValidationSuccessLocation
+
+spring:
+  logging:
+    level:
+      com.chakravarthy.project: DEBUG
+    pattern:
+      console: "%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"
+      file: "%d %p [%t] %X[transactionId] %m%n"
+    file: BatchProcessing.log
+  application:
+    name: project
+  batch:
+    job:
+      enabled: false
+  main:
+    allow-circular-references: true
+    allow-bean-definition-overriding: true
+  h2:
+    datasource:
+      url: jdbc:h2:mem:mydb
+      username: sa
+      password: password
+      driverClassName: org.h2.Driver
+    jpa:
+      defer-datasource-initialization: true
+      spring:
+        jpa:
+          database-platform: org.hibernate.dialect.H2dialect
+    console:
+     enabled: true
+     path: /h2-console
+     settings:
+       trace: false
+       web-allow-others: false
+batch:
+  Validation:
+    sourcesystem-abbrevations: UDAY,HARI,VISHAL,VIHAR,BUNNY
+    count : 100000  #   ${LINE_NUMBER_COUNT : 100000}
+    source-system:
+      xml: HARI,UDAY
+      csv: VIHAR
+      fixed-length: VISHAL
+      json: BUNNY
+  chunk:
+    size: 100
+
+cache-scheduler-value: "0 0 22 * * ?"
+
